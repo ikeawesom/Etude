@@ -6,7 +6,7 @@ import PrimaryButton from "../../components/utils/PrimaryButton";
 
 export default function WelcomeScreen({ navigation }) {
   const nextPage = () => {
-    navigation.navigate("DetailsScreen");
+    navigation.navigate("AssistantTypeScreen");
   };
 
   return (
