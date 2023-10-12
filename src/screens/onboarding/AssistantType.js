@@ -1,9 +1,11 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import SafeCenter from "../../components/SafeCenter";
 import { LightCheck } from "../../contexts/ThemeContext";
-import { setAssistantType } from "../../utils/handleOnboarding";
-import { StatusBar } from "expo-status-bar";
+import {
+  initalizePrefs,
+  setAssistantType,
+} from "../../utils/handlePreferences";
 
 export default function AssistantTypeScreen({ navigation }) {
   const handleAssistantGender = async (type) => {
@@ -11,9 +13,16 @@ export default function AssistantTypeScreen({ navigation }) {
     if (status) navigation.navigate("DetailsScreen");
   };
 
+  useEffect(() => {
+    const init = async () => {
+      await initalizePrefs();
+    };
+    init();
+  }, []);
+
   return (
     <SafeCenter styles={`${LightCheck() ? "bg-slate-100" : "bg-slate-800"}`}>
-      <View className="items-center justify-center p-10 gap-y-10">
+      <View className="items-center justify-center gap-y-10">
         <View>
           <Text
             className={`${
