@@ -1,9 +1,10 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 
 import {
   Home,
@@ -12,8 +13,12 @@ import {
   Settings,
   LoadingScreen,
 } from "./src/screens";
-import { checkOnboard } from "./src/utils/Onboarding";
-import { WelcomeScreen, DetailsScreen } from "./src/screens/onboarding";
+import { checkOnboard } from "./src/utils/handleOnboarding";
+import {
+  WelcomeScreen,
+  DetailsScreen,
+  AssistantTypeScreen,
+} from "./src/screens/onboarding";
 import { ThemeContextProvider } from "./src/contexts/ThemeContext";
 
 // SplashScreen.preventAutoHideAsync();
@@ -45,12 +50,22 @@ export default function App() {
 }
 
 function DefaultNavigation({ layout }) {
-  const { status } = checkOnboard();
+  const [status, setStatus] = useState(true);
+
+  useEffect(() => {
+    const handleOnboarding = async () => {
+      const { status } = await checkOnboard();
+      if (!status) setStatus(false);
+    };
+
+    handleOnboarding();
+  }, []);
 
   if (status)
     return (
       <ThemeContextProvider>
         <NavigationContainer onLayout={layout}>
+          <StatusBar style="auto" />
           <Tab.Navigator>
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Events" component={Events} />
@@ -63,8 +78,18 @@ function DefaultNavigation({ layout }) {
   return (
     <ThemeContextProvider>
       <NavigationContainer onLayout={layout}>
+        <StatusBar style="auto" />
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen component={WelcomeScreen} name="WelcomeScreen" />
+          <Stack.Screen
+            component={WelcomeScreen}
+            name="WelcomeScreen"
+            options={{ animation: "fade" }}
+          />
+          <Stack.Screen
+            component={AssistantTypeScreen}
+            options={{ animation: "fade" }}
+            name="AssistantTypeScreen"
+          />
           <Stack.Screen
             component={DetailsScreen}
             options={{ animation: "fade" }}
