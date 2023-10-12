@@ -1,10 +1,18 @@
-import { View, Text } from "react-native";
+import { ext } from "react-native";
 import React from "react";
+import SafeCenter from "../components/SafeCenter";
+import { LightCheck } from "../contexts/ThemeContext";
 
 export default function LoadingScreen() {
   return (
-    <View className="flex-1 items-center justify-center bg-gradient-to-br from-sky-200 to-sky-500">
-      <Text className="text-3xl text-slate-50">Loading resources...</Text>
-    </View>
+    <SafeCenter styles={`${LightCheck() ? "bg-slate-100" : "bg-slate-800"}`}>
+      <Text
+        className={`${
+          LightCheck() ? "text-slate-800" : "text-slate-50"
+        } text-3xl font-default-regular text-center`}
+      >
+        Loading resources...
+      </Text>
+    </SafeCenter>
   );
 }
