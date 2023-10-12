@@ -13,7 +13,8 @@ import {
   LoadingScreen,
 } from "./src/screens";
 import { checkOnboard } from "./src/utils/Onboarding";
-import { WelcomeScreen } from "./src/screens/Onboard";
+import { WelcomeScreen, DetailsScreen } from "./src/screens/onboarding";
+import { ThemeContextProvider } from "./src/contexts/ThemeContext";
 
 // SplashScreen.preventAutoHideAsync();
 
@@ -26,6 +27,10 @@ export default function App() {
     "Gabarito-Medium": require("./assets/fonts/Gabarito-Medium.ttf"),
     "Gabarito-SemiBold": require("./assets/fonts/Gabarito-SemiBold.ttf"),
     "Gabarito-Bold": require("./assets/fonts/Gabarito-Bold.ttf"),
+    "Montserrat-Regular": require("./assets/fonts/Montserrat-Regular.ttf"),
+    "Montserrat-Medium": require("./assets/fonts/Montserrat-Medium.ttf"),
+    "Montserrat-SemiBold": require("./assets/fonts/Montserrat-SemiBold.ttf"),
+    "Montserrat-Light": require("./assets/fonts/Montserrat-Light.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -44,20 +49,29 @@ function DefaultNavigation({ layout }) {
 
   if (status)
     return (
-      <NavigationContainer onLayout={layout}>
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={Home} />
-          <Tab.Screen name="Events" component={Events} />
-          <Tab.Screen name="Assignments" component={Assignments} />
-          <Tab.Screen name="Settings" component={Settings} />
-        </Tab.Navigator>
-      </NavigationContainer>
+      <ThemeContextProvider>
+        <NavigationContainer onLayout={layout}>
+          <Tab.Navigator>
+            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Events" component={Events} />
+            <Tab.Screen name="Assignments" component={Assignments} />
+            <Tab.Screen name="Settings" component={Settings} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </ThemeContextProvider>
     );
   return (
-    <NavigationContainer onLayout={layout}>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen component={WelcomeScreen} name="WelcomeScreen" />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ThemeContextProvider>
+      <NavigationContainer onLayout={layout}>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen component={WelcomeScreen} name="WelcomeScreen" />
+          <Stack.Screen
+            component={DetailsScreen}
+            options={{ animation: "fade" }}
+            name="DetailsScreen"
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeContextProvider>
   );
 }
