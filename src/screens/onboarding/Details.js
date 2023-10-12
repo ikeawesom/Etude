@@ -2,23 +2,28 @@ import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import SafeCenter from "../../components/SafeCenter";
 import { LightCheck } from "../../contexts/ThemeContext";
-import { getAssistantName } from "../../utils/handleOnboarding";
+import { getAssistantName, setName } from "../../utils/handlePreferences";
+import { setOnboard } from "../../utils/handleOnboarding";
 
-export default function DetailsScreen() {
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
+export default function DetailsScreen({ navigation }) {
+  const [assistName, setAssistName] = useState("");
+  const [nameInput, setNameInput] = useState("");
 
   useEffect(() => {
     const handleAssistantName = async () => {
       const { name } = await getAssistantName();
-      if (name) setName(name);
+      if (name) setAssistName(name);
     };
 
     handleAssistantName();
   }, []);
 
-  const handleName = (name) => {
-    console.log(name);
+  const handleName = async () => {
+    const { status } = await setName(nameInput);
+    if (status) {
+      const { status } = await setOnboard();
+      if (status) navigation.navigate("Navigations");
+    }
   };
 
   return (
@@ -27,7 +32,11 @@ export default function DetailsScreen() {
     >
       <View className="py-20 gap-y-10">
         <Text className="text-3xl text-slate-50 font-montserrat-regular text-center">
-          Hi, I am {name} and I will be your personal study assistant!
+          Hi, I am{" "}
+          <Text className="font-montserrat-semibold text-sky-500">
+            {assistName}
+          </Text>{" "}
+          and I will be your personal study assistant!
         </Text>
         <View className="gap-y-2">
           <Text className="text-lg text-slate-50 font-montserrat-regular text-center">
@@ -36,8 +45,8 @@ export default function DetailsScreen() {
           <TextInput
             placeholder="How can I address you?"
             className="bg-white px-6 py-4 rounded-lg shadow-md text-lg font-montserrat-medium"
-            value={username}
-            onChangeText={(text) => setUsername(text)}
+            value={nameInput}
+            onChangeText={(text) => setNameInput(text)}
           />
         </View>
         <TouchableOpacity style={{ alignSelf: "center" }} onPress={handleName}>
