@@ -2,29 +2,23 @@ import { useCallback, useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
-import {
-  Home,
-  Events,
-  Assignments,
-  Settings,
-  LoadingScreen,
-} from "./src/screens";
-import { checkOnboard } from "./src/utils/handleOnboarding";
+import { LoadingScreen } from "./src/screens";
+import { checkOnboard, resetOnboarding } from "./src/utils/handleOnboarding";
 import {
   WelcomeScreen,
   DetailsScreen,
   AssistantTypeScreen,
 } from "./src/screens/onboarding";
 import { ThemeContextProvider } from "./src/contexts/ThemeContext";
+import Navigations from "./src/screens/Navigations";
+import { resetUserPrefs } from "./src/utils/handlePreferences";
 
 // SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -49,32 +43,19 @@ export default function App() {
   return <DefaultNavigation layout={onLayoutRootView} />;
 }
 
-function DefaultNavigation({ layout }) {
-  const [status, setStatus] = useState(true);
+var debug = false;
 
+function DefaultNavigation({ layout }) {
+  // debug = true;
   useEffect(() => {
-    const handleOnboarding = async () => {
-      const { status } = await checkOnboard();
-      if (!status) setStatus(false);
+    const reset = async () => {
+      await resetOnboarding();
+      await resetUserPrefs();
     };
 
-    handleOnboarding();
+    if (debug) reset();
   }, []);
 
-  if (status)
-    return (
-      <ThemeContextProvider>
-        <NavigationContainer onLayout={layout}>
-          <StatusBar style="auto" />
-          <Tab.Navigator>
-            <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Events" component={Events} />
-            <Tab.Screen name="Assignments" component={Assignments} />
-            <Tab.Screen name="Settings" component={Settings} />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </ThemeContextProvider>
-    );
   return (
     <ThemeContextProvider>
       <NavigationContainer onLayout={layout}>
@@ -94,6 +75,11 @@ function DefaultNavigation({ layout }) {
             component={DetailsScreen}
             options={{ animation: "fade" }}
             name="DetailsScreen"
+          />
+          <Stack.Screen
+            component={Navigations}
+            name="Navigations"
+            options={{ animation: "fade" }}
           />
         </Stack.Navigator>
       </NavigationContainer>
