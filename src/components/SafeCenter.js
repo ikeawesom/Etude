@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 export default function SafeCenter({ children, styles }) {
   return (
     <SafeAreaView
-      className={twMerge("flex-1 justify-center items-center", styles)}
+      className={twMerge("flex-1 justify-center items-center p-4", styles)}
     >
       {children}
     </SafeAreaView>
