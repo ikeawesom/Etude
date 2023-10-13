@@ -54,9 +54,10 @@ export async function getAssistantName() {
     if (!name) {
       // new user
       if (type === "MALE") {
-        name = maleNames[Math.floor(Math.random() * maleNames.length - 1)];
+        name = maleNames[Math.floor(Math.random() * (maleNames.length - 1))];
       } else if (type === "FEMALE") {
-        name = femaleNames[Math.floor(Math.random() * femaleNames.length - 1)];
+        name =
+          femaleNames[Math.floor(Math.random() * (femaleNames.length - 1))];
       }
       userPrefs = { ...userPrefs, assistantName: name };
       await AsyncStorage.setItem("USER_PREFS", JSON.stringify(userPrefs));
