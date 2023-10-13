@@ -4,7 +4,7 @@
     "slug": "Etude",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.svg",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/splash.png",
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.svg",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#1E293B"
       }
     },
     "web": {
-      "favicon": "./assets/icon.svg"
+      "favicon": "./assets/icon.png"
     }
   }
 }
