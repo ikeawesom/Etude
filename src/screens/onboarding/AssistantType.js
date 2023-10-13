@@ -1,13 +1,16 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React, { useEffect } from "react";
 import SafeCenter from "../../components/SafeCenter";
-import { LightCheck } from "../../contexts/ThemeContext";
+import { useThemeContext } from "../../contexts/ThemeContext";
+
 import {
   initalizePrefs,
   setAssistantType,
 } from "../../utils/handlePreferences";
 
 export default function AssistantTypeScreen({ navigation }) {
+  const { theme } = useThemeContext();
+
   const handleAssistantGender = async (type) => {
     const { status } = await setAssistantType(type);
     if (status) navigation.navigate("DetailsScreen");
@@ -21,12 +24,14 @@ export default function AssistantTypeScreen({ navigation }) {
   }, []);
 
   return (
-    <SafeCenter styles={`${LightCheck() ? "bg-slate-100" : "bg-slate-800"}`}>
+    <SafeCenter
+      styles={`${theme === "light" ? "bg-slate-100" : "bg-slate-800"}`}
+    >
       <View className="items-center justify-center gap-y-10">
         <View>
           <Text
             className={`${
-              LightCheck() ? "text-slate-800" : "text-slate-50"
+              theme === "light" ? "text-slate-800" : "text-slate-50"
             } text-3xl font-montserrat-regular text-center`}
           >
             Before we get started, who would you like your personal study

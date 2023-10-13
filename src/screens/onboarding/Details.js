@@ -1,13 +1,14 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import SafeCenter from "../../components/SafeCenter";
-import { LightCheck } from "../../contexts/ThemeContext";
+import { useThemeContext } from "../../contexts/ThemeContext";
 import { getAssistantName, setName } from "../../utils/handlePreferences";
 import { setOnboard } from "../../utils/handleOnboarding";
 
 export default function DetailsScreen({ navigation }) {
   const [assistName, setAssistName] = useState("");
   const [nameInput, setNameInput] = useState("");
+  const { theme } = useThemeContext();
 
   useEffect(() => {
     const handleAssistantName = async () => {
@@ -28,7 +29,9 @@ export default function DetailsScreen({ navigation }) {
 
   return (
     <SafeCenter
-      styles={`${LightCheck() ? "bg-slate-100" : "bg-slate-800"} justify-start`}
+      styles={`${
+        theme === "light" ? "bg-slate-100" : "bg-slate-800"
+      } justify-start`}
     >
       <View className="py-20 gap-y-10">
         <Text className="text-3xl text-slate-50 font-montserrat-regular text-center">

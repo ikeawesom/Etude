@@ -21,8 +21,3 @@ export function useThemeContext() {
   }
   return context;
 }
-
-export function LightCheck() {
-  const { theme } = useThemeContext();
-  return theme === "light";
-}
