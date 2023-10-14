@@ -52,11 +52,16 @@ export default function DetailsScreen({ navigation }) {
             onChangeText={(text) => setNameInput(text)}
           />
         </View>
-        <TouchableOpacity style={{ alignSelf: "center" }} onPress={handleName}>
-          <Text className="text-lg font-montserrat-medium text-sky-400 text-center">
-            Continue
-          </Text>
-        </TouchableOpacity>
+        {nameInput !== "" && (
+          <TouchableOpacity
+            style={{ alignSelf: "center" }}
+            onPress={handleName}
+          >
+            <Text className="text-lg font-montserrat-medium text-sky-400 text-center">
+              Continue
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </SafeCenter>
   );
