@@ -13,9 +13,7 @@ export async function getEvents() {
 
 export async function createEvent({ index, title, desc, date, time, tags }) {
   try {
-    const { data } = await checkUserData();
-
-    var userData = data;
+    var userData = (await checkUserData()).data;
     var userEvents = userData.EVENTS;
 
     const newEvent = {
