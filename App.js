@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -6,7 +6,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
 import { LoadingScreen } from "./src/screens";
-import { checkOnboard, resetOnboarding } from "./src/utils/handleOnboarding";
 import {
   WelcomeScreen,
   DetailsScreen,
@@ -16,6 +15,7 @@ import { ThemeContextProvider } from "./src/contexts/ThemeContext";
 import Navigations from "./src/screens/Navigations";
 import { resetUserPrefs } from "./src/utils/handlePreferences";
 import { resetUserData } from "./src/utils/handleUserData";
+import { resetOnboarding } from "./src/utils/handleOnboarding";
 
 // SplashScreen.preventAutoHideAsync();
 
