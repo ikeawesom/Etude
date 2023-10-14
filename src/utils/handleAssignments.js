@@ -18,6 +18,7 @@ export async function createAssignment({
   due,
   subject,
   tags,
+  color,
 }) {
   try {
     const { data } = await checkUserData();
@@ -30,6 +31,7 @@ export async function createAssignment({
       desc: desc,
       due: due,
       subject: subject,
+      color: color,
       tags: tags,
     };
 

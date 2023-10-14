@@ -6,6 +6,7 @@ const ASSIGNMENT = {
   desc: "",
   due: "",
   subject: "",
+  color: "",
   tags: [],
 };
 
