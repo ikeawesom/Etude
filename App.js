@@ -15,6 +15,7 @@ import {
 import { ThemeContextProvider } from "./src/contexts/ThemeContext";
 import Navigations from "./src/screens/Navigations";
 import { resetUserPrefs } from "./src/utils/handlePreferences";
+import { resetUserData } from "./src/utils/handleUserData";
 
 // SplashScreen.preventAutoHideAsync();
 
@@ -51,6 +52,7 @@ function DefaultNavigation({ layout }) {
     const reset = async () => {
       await resetOnboarding();
       await resetUserPrefs();
+      await resetUserData();
     };
 
     if (debug) reset();
