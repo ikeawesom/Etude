@@ -11,7 +11,14 @@ export async function getAssignments() {
   }
 }
 
-export async function createAssignment({ index, title, desc, due, tags }) {
+export async function createAssignment({
+  index,
+  title,
+  desc,
+  due,
+  subject,
+  tags,
+}) {
   try {
     const { data } = await checkUserData();
     var userData = data;
@@ -22,6 +29,7 @@ export async function createAssignment({ index, title, desc, due, tags }) {
       title: title,
       desc: desc,
       due: due,
+      subject: subject,
       tags: tags,
     };
 
