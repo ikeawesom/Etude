@@ -13,6 +13,12 @@ module.exports = {
         "montserrat-semibold": "Montserrat-SemiBold",
         "montserrat-light": "Montserrat-Light",
       },
+      colors: {
+        "dark-black": "#171616",
+        "dark-black": "#1C202B",
+        "dark-card": "#262C38",
+        primary: "#0D9FDB",
+      },
     },
   },
   plugins: [],
