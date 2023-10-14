@@ -41,7 +41,10 @@ export async function resetUserData() {
 export async function checkUserData() {
   try {
     const res = await AsyncStorage.getItem("USER_DATA");
-    if (res !== null) return { error: null, status: true, data: res };
+    if (res !== null) {
+      const userData = JSON.parse(res);
+      return { error: null, status: true, data: userData };
+    }
     return { error: null, status: false, data: null };
   } catch (error) {
     return { error: error, status: false, data: null };
