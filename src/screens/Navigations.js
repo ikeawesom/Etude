@@ -22,7 +22,22 @@ export default function Navigations() {
     return (
       <>
         <StatusBar style="auto" />
-        <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Navigator
+          screenOptions={{
+            headerShown: false,
+            tabBarStyle: {
+              backgroundColor: "#0F0F0F",
+              borderTopWidth: 0,
+              height: 60,
+            },
+            tabBarActiveTintColor: "#0D9FDB",
+            tabBarLabelStyle: {
+              fontSize: 12,
+              fontFamily: "Gabarito-Regular",
+              paddingBottom: 4,
+            },
+          }}
+        >
           <Tab.Screen name="Home" component={Home} />
           <Tab.Screen name="Events" component={Events} />
           <Tab.Screen name="Assignments" component={Assignments} />
