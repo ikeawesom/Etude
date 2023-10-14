@@ -30,13 +30,13 @@ export default function DetailsScreen({ navigation }) {
   return (
     <SafeCenter
       styles={`${
-        theme === "light" ? "bg-slate-100" : "bg-slate-800"
+        theme === "light" ? "bg-slate-100" : "bg-dark-black"
       } justify-start`}
     >
       <View className="py-20 gap-y-10">
         <Text className="text-3xl text-slate-50 font-montserrat-regular text-center">
           Hi, I am{" "}
-          <Text className="font-montserrat-semibold text-sky-500">
+          <Text className="font-montserrat-semibold text-primary">
             {assistName}
           </Text>{" "}
           and I will be your personal study assistant!

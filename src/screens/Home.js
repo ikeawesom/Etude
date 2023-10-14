@@ -33,17 +33,17 @@ export default function Home({ navigation }) {
     return (
       <SafeAreaView
         className={`pt-10 ${
-          theme === "light" ? "bg-slate-100" : "bg-slate-800"
+          theme === "light" ? "bg-slate-100" : "bg-dark-black"
         }`}
       >
         <ScrollView className={`p-10 gap-y-8 pt-0 `}>
           <View>
             <Text
               className={`text-3xl font-default-regular text-center ${
-                theme === "dark" ? "text-slate-50" : "text-slate-800"
+                theme === "dark" ? "text-slate-50" : "text-dark-black"
               }`}
             >
-              Hi there, <Text className="text-sky-500">{userPrefs.name}</Text>!
+              Hi there, <Text className="text-primary">{userPrefs.name}</Text>!
               What can I do for you today?
             </Text>
           </View>
@@ -55,10 +55,10 @@ export default function Home({ navigation }) {
           </View>
           <Text
             className={`py-4 text-center font-default-semibold ${
-              theme === "dark" ? "text-slate-50" : "text-slate-800"
+              theme === "dark" ? "text-slate-50" : "text-dark-black"
             }`}
           >
-            Created by <Text className="text-sky-500">Mentaicode</Text>
+            Created by <Text className="text-primary">Mentaicode</Text>
           </Text>
         </ScrollView>
       </SafeAreaView>

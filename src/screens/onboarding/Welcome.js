@@ -27,20 +27,20 @@ export default function WelcomeScreen({ navigation }) {
   if (loaded)
     return (
       <SafeCenter
-        styles={`${theme === "light" ? "bg-slate-100" : "bg-slate-800"}`}
+        styles={`${theme === "light" ? "bg-slate-100" : "bg-dark-black"}`}
       >
         <View className="items-center justify-center p-10 gap-y-10">
           <View className="items-center justify-center">
             <Text
               className={`${
-                theme === "light" ? "text-slate-800" : "text-slate-50"
+                theme === "light" ? "text-dark-black" : "text-slate-50"
               } text-6xl font-default-regular text-center`}
             >
               Etude
             </Text>
             <Text
               className={`${
-                theme === "light" ? "text-slate-800" : "text-slate-100"
+                theme === "light" ? "text-dark-black" : "text-slate-100"
               } text-2xl font-montserrat-regular text-center`}
             >
               The best study partner that tracks and manages your work, fully

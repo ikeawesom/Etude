@@ -4,7 +4,7 @@ import SafeCenter from "../components/SafeCenter";
 
 export default function LoadingScreen() {
   return (
-    <SafeCenter styles="bg-slate-800">
+    <SafeCenter styles="bg-dark-black">
       <Image
         source={require("../../assets/icon.png")}
         style={{ height: 180, width: 180 }}
