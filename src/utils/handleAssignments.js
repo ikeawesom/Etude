@@ -40,8 +40,14 @@ export async function createAssignment({ index, title, desc, due, tags }) {
 export async function deleteAssignment(index) {
   try {
     const userData_str = await checkUserData();
-    var userData = JSON.parse(userData_str);
+    var userData = JSON.parse(userData_str.data);
     var userAssignments = userData.ASSIGNMENTS;
+    const to_delete = userAssignments[index];
+    delete userAssignments[index];
+
+    userData = { ...userData, ASSIGNMENTS: userAssignments };
+    await AsyncStorage.setItem("USER_DATA", JSON.stringify(userData));
+    return { error: null, data: to_delete, status: true };
   } catch (error) {
     return { error: error, data: null, status: false };
   }
