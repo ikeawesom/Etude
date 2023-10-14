@@ -7,8 +7,8 @@ export default function LoadingScreen() {
     <SafeCenter styles="bg-slate-800">
       <Image
         source={require("../../assets/icon.png")}
-        style={{ height: 150, width: 150 }}
-        className="rounded-xl"
+        style={{ height: 180, width: 180 }}
+        className="rounded-3xl"
       />
     </SafeCenter>
   );
