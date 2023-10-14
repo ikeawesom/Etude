@@ -3,10 +3,9 @@ import { checkUserData } from "./handleUserData";
 
 export async function getAssignments() {
   try {
-    const USER_DATA_STR = await AsyncStorage.getItem("USER_DATA");
-    const USER_DATA = JSON.parse(USER_DATA_STR);
+    const { data } = await checkUserData();
 
-    return { error: null, data: USER_DATA.ASSIGNMENTS, status: true };
+    return { error: null, data: data.ASSIGNMENTS, status: true };
   } catch (error) {
     return { error: error, data: null, status: false };
   }
@@ -15,8 +14,7 @@ export async function getAssignments() {
 export async function createAssignment({ index, title, desc, due, tags }) {
   try {
     const { data } = await checkUserData();
-
-    var userData = JSON.parse(data);
+    var userData = data;
     var userAssignments = userData.ASSIGNMENTS;
 
     const newAssignment = {
@@ -28,9 +26,10 @@ export async function createAssignment({ index, title, desc, due, tags }) {
     };
 
     userAssignments = { ...userAssignments, [index]: newAssignment };
-
     userData = { ...userData, ASSIGNMENTS: userAssignments };
+
     await AsyncStorage.setItem("USER_DATA", JSON.stringify(userData));
+
     return { error: null, data: newAssignment, status: true };
   } catch (error) {
     return { error: error, data: null, status: false };
@@ -39,14 +38,16 @@ export async function createAssignment({ index, title, desc, due, tags }) {
 
 export async function deleteAssignment(index) {
   try {
-    const userData_str = await checkUserData();
-    var userData = JSON.parse(userData_str.data);
-    var userAssignments = userData.ASSIGNMENTS;
-    const to_delete = userAssignments[index];
-    delete userAssignments[index];
+    var userData = (await checkUserData()).data;
+    var userAssignments = (await getAssignments()).data;
 
+    const to_delete = userAssignments[index];
+
+    delete userAssignments[index];
     userData = { ...userData, ASSIGNMENTS: userAssignments };
+
     await AsyncStorage.setItem("USER_DATA", JSON.stringify(userData));
+
     return { error: null, data: to_delete, status: true };
   } catch (error) {
     return { error: error, data: null, status: false };
