@@ -14,7 +14,7 @@ module.exports = {
         "montserrat-light": "Montserrat-Light",
       },
       colors: {
-        "dark-black": "#171616",
+        "custom-black": "#0F0F0F",
         "dark-black": "#1C202B",
         "dark-card": "#262C38",
         primary: "#0D9FDB",
