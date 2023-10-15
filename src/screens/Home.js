@@ -32,11 +32,11 @@ export default function Home({ navigation }) {
   if (loaded)
     return (
       <SafeAreaView
-        className={`pt-10 ${
+        className={`pt-10 flex-1 ${
           theme === "light" ? "bg-slate-100" : "bg-dark-black"
         }`}
       >
-        <ScrollView className={`p-10 gap-y-8 pt-0 `}>
+        <ScrollView className="px-10 gap-y-8">
           <View>
             <Text
               className={`text-3xl font-default-regular text-center ${
@@ -53,13 +53,6 @@ export default function Home({ navigation }) {
           <View>
             <AssignmentsContainer navigation={navigation} />
           </View>
-          <Text
-            className={`py-4 text-center font-default-semibold ${
-              theme === "dark" ? "text-slate-50" : "text-dark-black"
-            }`}
-          >
-            Created by <Text className="text-primary">Mentaicode</Text>
-          </Text>
         </ScrollView>
       </SafeAreaView>
     );
